@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="burglary">Burglary</string>
+    <string name="assault">Assault</string>
+    <string name="robbery">Robbery</string>
+    <string name="auto_theft">Auto theft</string>
+    <string name="mugging">Mugging</string>
+    <string name="murder">Murder</string>
+    <string name="sexual_assault">Sexual assault</string>
+
+    <color name="burglary">#FFFFFF</color>
+    <color name="assault">#FFFFFF</color>
+    <color name="robbery">#FFFFFF</color>
+    <color name="auto_theft">#FFFFFF</color>
+    <color name="mugging">#FFFFFF</color>
+    <color name="murder">#FFFFFF</color>
+    <color name="sexual_assault">#FFFFFF</color>
+
+    <string-array name="crime_array">
+        <item>@string/burglary</item>
+        <item>@string/assault</item>
+        <item>@string/robbery</item>
+        <item>@string/auto_theft</item>
+        <item>@string/mugging</item>
+        <item>@string/murder</item>
+        <item>@string/sexual_assault</item>
+    </string-array>
+
+
+
+
+</resources>
