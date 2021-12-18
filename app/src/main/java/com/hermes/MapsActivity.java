@@ -1,8 +1,15 @@
 package com.hermes;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,6 +23,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+    private static String TAG = "mercury.mapsact";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,4 +56,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
+    public void addCrime(View view) {
+        Log.d(TAG, "called");
+        LatLng sydneyish = new LatLng(-35, 152);
+        mMap.addMarker(new MarkerOptions().position(sydneyish).title("Test marker"));
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        View directionView = inflater.inflate(R.layout.add_crime_instructions_window, null);
+////
+////        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = false; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(directionView, width, height, focusable);
+
+//        // show the popup window
+//        // which view you pass in doesn't matter, it is only used for the window token
+        popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+//
+//        // dismiss the popup window when touched
+//        view.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                v.performClick();
+//                popupWindow.dismiss();
+//                return true;
+//            }
+//        });
+
+    }
+
 }
