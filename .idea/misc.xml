@@ -3,16 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21145833333333333" />
-        <entry key="app/src/main/res/drawable/button_background.xml" value="0.3728205128205128" />
-        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.21145833333333333" />
-        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.1773882826579165" />
-        <entry key="app/src/main/res/layout/add_crime_instructions_window.xml" value="0.3564661131263658" />
-        <entry key="app/src/main/res/layout/add_crime_window.xml" value="0.17097264437689969" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/drawable/ic_launcher_background.xml" value="0.17685185185185184" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/activity_maps.xml" value="0.15982776089159068" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/actvity_main.xml" value="0.33177083333333335" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/menu_bar_layout.xml" value="0.16134751773049646" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/viewpager.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes/Hermes-build/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
