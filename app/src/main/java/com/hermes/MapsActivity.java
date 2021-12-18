@@ -2,6 +2,7 @@ package com.hermes;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.app.ActivityManager;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 import com.hermes.databinding.ActivityMapsBinding;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -31,22 +34,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     private static String TAG = "mercury.mapsact";
-//    private Toolbar toolbar;
+    //private Toolbar toolbar;
     private PopupWindow currentPopup;
     private Marker currentMarker;
+    //private ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "started create");
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Log.d(TAG, "create checkpoint");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        Log.d(TAG, "finished create");
         //toolbar = findViewById();
+        ViewPagerAdapter sectionsPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager());
+        ViewPager viewPager = binding.menuBar;
+        viewPager.setAdapter(sectionsPagerAdapter);
+        TabLayout tabs = binding.tabs;
+        tabs.setupWithViewPager(viewPager);
+        //FloatingActionButton fab = binding.fab;
     }
 
     /**
@@ -60,13 +74,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Log.d(TAG, "ready");
+        Log.d(TAG, "started map ready");
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        Log.d(TAG, "finished map ready");
     }
 
     public void addCrime(View view) {
@@ -81,7 +96,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LayoutInflater inflater = (LayoutInflater)
                 getSystemService(LAYOUT_INFLATER_SERVICE);
 
-        View directionView = inflater.inflate(R.layout.add_crime_instructions_window, null);
+        View directionView = inflater.inflate(R.layout.add_crime_instructions_window, v);
         //        LatLng sydneyish = new LatLng(-35, 152);
         Marker marker = mMap.addMarker(new MarkerOptions()
                 .title("Crime location")
