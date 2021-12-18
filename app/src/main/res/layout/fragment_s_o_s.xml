@@ -13,15 +13,15 @@
         android:layout_width="185dp"
         android:layout_height="72dp"
         android:text="Panic Button"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="380dp" />
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="124dp" />
 
     <Button
-        android:id="@+id/button4"
-        android:layout_width="158dp"
-        android:layout_height="63dp"
-        android:text="Button"
-        tools:layout_editor_absoluteX="109dp"
-        tools:layout_editor_absoluteY="515dp" />
+        android:id="@+id/button5"
+        android:layout_width="185dp"
+        android:layout_height="72dp"
+        android:text="Panic Button"
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="347dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
