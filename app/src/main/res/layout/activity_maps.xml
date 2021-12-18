@@ -22,7 +22,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/viewPager"
         android:layout_marginTop="?attr/actionBarSize"
-        tools:context=".MapsActivity" />
+        tools:context=".MapsActivity"
+        tools:layout="@layout/menu_bar_layout" />
 
     <ImageButton
         android:id="@+id/imageButton"

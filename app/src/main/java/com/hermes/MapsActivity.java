@@ -3,6 +3,7 @@ package com.hermes;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.FragmentActivity;
 
+import android.app.ActivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -30,11 +31,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     private static String TAG = "mercury.mapsact";
-<<<<<<< HEAD
-    private Toolbar toolbar;
-=======
+//    private Toolbar toolbar;
     private PopupWindow currentPopup;
->>>>>>> 0ee316b3ff1773ddf8435eb12ae4fa4619f63647
+    private Marker currentMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        //mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync(this);
         //toolbar = findViewById();
     }
 
@@ -61,6 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Log.d(TAG, "ready");
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
@@ -70,6 +70,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void addCrime(View view) {
+        if (mMap == null) {
+            return;
+        }
         Log.d(TAG, "called");
 //        LatLng sydneyish = new LatLng(-35, 152);
 //        mMap.addMarker(new MarkerOptions().position(sydneyish).title("Test marker"));
@@ -96,6 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        // which view you pass in doesn't matter, it is only used for the window token
         popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
         currentPopup = popupWindow;
+        currentMarker = marker;
 //
 //        // dismiss the popup window when touched
 //        Button but = findViewById(R.id.confirm_button);
@@ -103,6 +107,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            @Override
 //            public boolean onTouch(View v, MotionEvent event) {
 ////                v.performClick();
+//                ImageButton addButton = findViewById(R.id.imageButton);
+//                addButton.setVisibility(View.VISIBLE);
+//                findViewById(R.id.confirm_button).setOnTouchListener(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View v, MotionEvent rawEvent) {
+//                        return false;
+//                    }
+//                });
 //                popupWindow.dismiss();
 //                return false;
 //            }
@@ -110,10 +122,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    public void addCrimeInformation(View view) {
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View directionView = inflater.inflate(R.layout.crime_details_window, null);
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = false; // lets taps outside the popup also dismiss it
+        final PopupWindow infoWindow = new PopupWindow(directionView, width, height, focusable);
+        infoWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+    }
+
     public void finishLocation(View view) {
         currentPopup.dismiss();
         ImageButton addButton = findViewById(R.id.imageButton);
         addButton.setVisibility(View.VISIBLE);
+        addCrimeInformation(view);
     }
 
 
