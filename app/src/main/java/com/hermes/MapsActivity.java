@@ -1,20 +1,27 @@
 package com.hermes;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.ActivityManager;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toolbar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,6 +36,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.hermes.databinding.ActivityMapsBinding;
 import com.hermes.ui.main.SectionsPagerAdapter;
+
+import java.util.Calendar;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -147,6 +156,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         boolean focusable = false; // lets taps outside the popup also dismiss it
         final PopupWindow infoWindow = new PopupWindow(directionView, width, height, focusable);
         infoWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+//        Spinner spinner = findViewById(R.id.spinner);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.crime_array, android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        // Apply the adapter to the spinner
+//        spinner.setAdapter(adapter);
 
     }
 
@@ -155,6 +169,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ImageButton addButton = findViewById(R.id.imageButton);
         addButton.setVisibility(View.VISIBLE);
         addCrimeInformation(view);
+    }
+
+    public static class TimePickerFragment extends DialogFragment
+            implements TimePickerDialog.OnTimeSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current time as the default values for the picker
+            final Calendar c = Calendar.getInstance();
+            int hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+
+            // Create a new instance of TimePickerDialog and return it
+            return new TimePickerDialog(getActivity(), this, hour, minute,
+                    DateFormat.is24HourFormat(getActivity()));
+        }
+
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            // Do something with the time chosen by the user
+        }
     }
 
 
