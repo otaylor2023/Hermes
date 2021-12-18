@@ -96,7 +96,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LayoutInflater inflater = (LayoutInflater)
                 getSystemService(LAYOUT_INFLATER_SERVICE);
 
-        View directionView = inflater.inflate(R.layout.add_crime_instructions_window, v);
+        View directionView = inflater.inflate(R.layout.add_crime_instructions_window, null);
         //        LatLng sydneyish = new LatLng(-35, 152);
         Marker marker = mMap.addMarker(new MarkerOptions()
                 .title("Crime location")

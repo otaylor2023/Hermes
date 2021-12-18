@@ -7,4 +7,5 @@
     <string name="tab_text_2">SOS</string>
     <string name="tab_text_3">Feed</string>
     <string name="tab_text_4">Safety Center</string>
+    <string name="title_activity_tabs">tabs</string>
 </resources>
