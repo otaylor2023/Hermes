@@ -3,19 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#CACACA">
+    android:background="#CACACA"
+    android:padding="10dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"/>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="198dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:text="Long press and drag the marker to the crime location"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="142dp"
+    <Button
+        android:id="@+id/confirm_button"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="addCrime"
-        android:text="Confirm Report" />
+        android:onClick="finishLocation"
+        android:text="Confirm"
+        android:textColor="@color/black" />
 
 </LinearLayout>

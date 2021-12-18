@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toolbar;
@@ -16,7 +19,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.hermes.databinding.ActivityMapsBinding;
 
@@ -25,7 +30,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     private static String TAG = "mercury.mapsact";
+<<<<<<< HEAD
     private Toolbar toolbar;
+=======
+    private PopupWindow currentPopup;
+>>>>>>> 0ee316b3ff1773ddf8435eb12ae4fa4619f63647
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +71,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void addCrime(View view) {
         Log.d(TAG, "called");
-        LatLng sydneyish = new LatLng(-35, 152);
-        mMap.addMarker(new MarkerOptions().position(sydneyish).title("Test marker"));
+//        LatLng sydneyish = new LatLng(-35, 152);
+//        mMap.addMarker(new MarkerOptions().position(sydneyish).title("Test marker"));
+        ImageButton addButton = findViewById(R.id.imageButton);
+        addButton.setVisibility(View.INVISIBLE);
         LayoutInflater inflater = (LayoutInflater)
                 getSystemService(LAYOUT_INFLATER_SERVICE);
 
         View directionView = inflater.inflate(R.layout.add_crime_instructions_window, null);
+        //        LatLng sydneyish = new LatLng(-35, 152);
+        Marker marker = mMap.addMarker(new MarkerOptions()
+                .title("Crime location")
+                .position(mMap.getCameraPosition().target)
+                .draggable(true)
+        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 ////
 ////        // create the popup window
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -78,17 +95,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        // show the popup window
 //        // which view you pass in doesn't matter, it is only used for the window token
         popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+        currentPopup = popupWindow;
 //
 //        // dismiss the popup window when touched
-//        view.setOnTouchListener(new View.OnTouchListener() {
+//        Button but = findViewById(R.id.confirm_button);
+//        findViewById(R.id.confirm_button).setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View v, MotionEvent event) {
-//                v.performClick();
+////                v.performClick();
 //                popupWindow.dismiss();
-//                return true;
+//                return false;
 //            }
 //        });
 
     }
+
+    public void finishLocation(View view) {
+        currentPopup.dismiss();
+        ImageButton addButton = findViewById(R.id.imageButton);
+        addButton.setVisibility(View.VISIBLE);
+    }
+
+
 
 }
