@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.hermes.databinding.ActivityMapsBinding;
+import com.hermes.ui.main.SectionsPagerAdapter;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -55,7 +56,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         Log.d(TAG, "finished create");
         //toolbar = findViewById();
-        ViewPagerAdapter sectionsPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.menuBar;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;

@@ -1,6 +1,10 @@
 package com.hermes.ui.main;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -29,7 +33,14 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1);
+        if(position == 0)
+            return PlaceholderFragment.newInstance(position + 1);
+        else if(position == 1)
+            return SOS.newInstance(position + 1);
+        else if(position == 2)
+            return PlaceholderFragment.newInstance(position + 1);
+        else
+            return PlaceholderFragment.newInstance(position + 1);
     }
 
     @Nullable
@@ -43,4 +54,5 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Show 2 total pages.
         return 4;
     }
+
 }
