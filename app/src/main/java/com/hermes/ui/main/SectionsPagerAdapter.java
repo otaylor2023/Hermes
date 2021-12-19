@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.hermes.MapsFragment;
+import com.hermes.PlaceholderFragment;
 import com.hermes.R;
 
 /**

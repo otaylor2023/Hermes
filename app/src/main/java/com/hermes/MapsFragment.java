@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -31,8 +32,6 @@ public class MapsFragment extends Fragment {
 
     private static String TAG = "mercury.maps_fragment";
     //private Toolbar toolbar;
-    private PopupWindow currentPopup;
-    private Marker currentMarker;
     private GoogleMap mMap;
 
     public static MapsFragment newInstance(int index) {
@@ -80,6 +79,20 @@ public class MapsFragment extends Fragment {
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
+
+        initializeButtons(view);
+    }
+
+    public void initializeButtons(View view) {
+        ImageButton addButton = view.findViewById(R.id.imageButton2);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCrime(view);
+            }
+        });
+
+
     }
 
 
@@ -91,7 +104,7 @@ public class MapsFragment extends Fragment {
         Log.d(TAG, "called");
 //        LatLng sydneyish = new LatLng(-35, 152);
 //        mMap.addMarker(new MarkerOptions().position(sydneyish).title("Test marker"));
-        ImageButton addButton = view.findViewById(R.id.imageButton);
+        ImageButton addButton = view.findViewById(R.id.imageButton2);
         addButton.setVisibility(View.INVISIBLE);
         LayoutInflater inflater = (LayoutInflater)
                 view.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -113,11 +126,16 @@ public class MapsFragment extends Fragment {
 //        // show the popup window
 //        // which view you pass in doesn't matter, it is only used for the window token
         popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
-        currentPopup = popupWindow;
-        currentMarker = marker;
 //
 //        // dismiss the popup window when touched
-//        Button but = findViewById(R.id.confirm_button);
+        Button confirmButton = popupWindow.getContentView().findViewById(R.id.confirm_button);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View popupView) {
+                finishLocation(view, popupWindow);
+
+            }
+        });
 //        findViewById(R.id.confirm_button).setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View v, MotionEvent event) {
@@ -137,11 +155,11 @@ public class MapsFragment extends Fragment {
 
     }
 
-    public void finishLocation(View view) {
+    public void finishLocation(View mainView, PopupWindow currentPopup) {
         currentPopup.dismiss();
-        ImageButton addButton = view.findViewById(R.id.imageButton);
+        ImageButton addButton = mainView.findViewById(R.id.imageButton2);
         addButton.setVisibility(View.VISIBLE);
-        addCrimeInformation(view);
+        addCrimeInformation(mainView);
     }
 
 

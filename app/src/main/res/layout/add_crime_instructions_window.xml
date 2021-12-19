@@ -23,7 +23,6 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:onClick="finishLocation"
         android:text="Confirm"
         android:textColor="@color/black" />
 

@@ -1,9 +1,11 @@
 package com.hermes;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -21,6 +23,7 @@ import com.hermes.ui.main.PageViewModel;
 public class PlaceholderFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private static final String TAG = "mercury.placeholderfrag";
 
     private PageViewModel pageViewModel;
     private FragmentTabsBinding binding;
@@ -59,12 +62,30 @@ public class PlaceholderFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Button testButton = view.findViewById(R.id.button2);
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "button clicked");
+            }
+        });
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void clickTest(View view) {
+
     }
 }

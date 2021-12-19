@@ -67,16 +67,16 @@ public class tabs extends AppCompatActivity {
     }
 
     // region maps methods
-
-    public void addCrime(View view) {
-        Log.d(TAG, "add crime tabs");
-        mapsFragment.addCrime(view);
-    }
-
-    public void finishLocation(View view) {
-        Log.d(TAG, "finish location tabs");
-        mapsFragment.finishLocation(view);
-    }
+//
+//    public void addCrime(View view) {
+////        Log.d(TAG, "add crime tabs");
+////        mapsFragment.addCrime(view);
+//    }
+//
+//    public void finishLocation(View view) {
+//        Log.d(TAG, "finish location tabs");
+//        mapsFragment.finishLocation(view);
+//    }
 
     // endregion maps methods
 }
