@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlaceholderFragment">
+    tools:context=".ui.main.PlaceholderFragment">
 
     <TextView
         android:id="@+id/section_label"
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="109dp" />
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="113dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
