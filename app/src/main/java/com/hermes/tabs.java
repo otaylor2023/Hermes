@@ -14,6 +14,7 @@ import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.hermes.ui.main.SectionsPagerAdapter;
 import com.hermes.databinding.ActivityTabsBinding;
