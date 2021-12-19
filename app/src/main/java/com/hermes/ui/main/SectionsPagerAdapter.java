@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.hermes.MapsFragment;
 import com.hermes.R;
 
 /**
@@ -34,9 +35,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         if(position == 0)
-            return PlaceholderFragment.newInstance(position + 1);
-        else if(position == 1)
             return SOS.newInstance(position + 1);
+        else if(position == 1)
+            return MapsFragment.newInstance(position + 1);
         else if(position == 2)
             return PlaceholderFragment.newInstance(position + 1);
         else
