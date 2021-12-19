@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.hermes.R;
-import com.hermes.databinding.FragmentTabsBinding;
+import com.hermes.databinding.FragmentSOSBinding;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -23,7 +23,7 @@ public class SOS extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private PageViewModel pageViewModel;
-    private FragmentTabsBinding binding;
+    private FragmentSOSBinding binding;
 
     public static SOS newInstance(int index) {
         SOS fragment = new SOS();
@@ -49,14 +49,14 @@ public class SOS extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
-        binding = FragmentTabsBinding.inflate(inflater, container, false);
+        binding = FragmentSOSBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.sectionLabel;
+//        final TextView textView = binding.sectionLabel;
         pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+//                textView.setText(s);
             }
         });
         return root;
@@ -67,4 +67,6 @@ public class SOS extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
 }

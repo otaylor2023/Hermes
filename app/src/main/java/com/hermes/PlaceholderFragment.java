@@ -1,4 +1,4 @@
-package com.hermes.ui.main;
+package com.hermes;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.hermes.R;
 import com.hermes.databinding.FragmentTabsBinding;
+import com.hermes.ui.main.PageViewModel;
 
 /**
  * A placeholder fragment containing a simple view.
