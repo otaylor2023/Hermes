@@ -13,6 +13,7 @@ import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.hermes.ui.main.SectionsPagerAdapter;
 import com.hermes.databinding.ActivityTabsBinding;
@@ -33,6 +34,13 @@ public class tabs extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
+//        Button button = (Button) findViewById(R.id.messageButton);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // Do something in response to button click
+//                sendEmergencyMessages(v);
+//            }
+//        });
 //        FloatingActionButton fab = binding.fab;
 //
 //        fab.setOnClickListener(new View.OnClickListener() {
