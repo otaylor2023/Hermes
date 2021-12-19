@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +39,23 @@ public class tabs extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
         tabs.selectTab(tabs.getTabAt(1));
         mapsFragment = (MapsFragment) sectionsPagerAdapter.getItem(1);
+
+//        FloatingActionButton fab = binding.fab;
+//
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+    }
+
+    public void sendEmergencyMessages(View view) {
+        String sPhone = "9738735376";
+        String etMessage = "Test";
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(sPhone, null, etMessage, null, null);
 
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
