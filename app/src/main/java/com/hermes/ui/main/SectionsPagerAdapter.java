@@ -1,10 +1,6 @@
 package com.hermes.ui.main;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -15,7 +11,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.hermes.MapsFragment;
 import com.hermes.PlaceholderFragment;
 import com.hermes.R;
-import com.hermes.SafetyCenter;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
