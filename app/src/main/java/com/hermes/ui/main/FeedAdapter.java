@@ -50,6 +50,11 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         return markerList.size();
     }
 
+    public void updateMarkerList(List<MarkerData> markerDataList) {
+        this.markerList = markerDataList;
+        notifyDataSetChanged();
+    }
+
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
