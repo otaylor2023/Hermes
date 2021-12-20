@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/typeFeedBox"
+        style="@style/crime_label_styles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type: Assault"
+        android:textAlignment="textStart" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/black" />
+
+    <TextView
+        android:id="@+id/sourceFeedBox"
+        style="@style/crime_label_styles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Source: Anonymous"
+        android:textAlignment="textStart"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/dateFeedBox"
+        style="@style/crime_label_styles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date: 10/10/10"
+        android:textAlignment="textStart"
+        android:textStyle="italic" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/black" >
+
+    </TableRow>
+
+    <TextView
+        android:id="@+id/textView16"
+        style="@style/crime_label_styles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp"
+        android:paddingTop="15dp"
+        android:text="User description:"
+        android:textAlignment="textStart"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/descFeedBox"
+        style="@style/crime_label_styles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {         // Create a new view, which defines the UI of the list item         View view = LayoutInflater.from(viewGroup.getContext())                 .inflate(R.layout.text_row_item, viewGroup, false);          return new ViewHolder(view);     }      // Replace the contents of a view (invoked by the layout manager)     @Override     public void onBindViewHolder(ViewHolder viewHolder, final int position) {          // Get element from your"
+        android:textAlignment="textStart"
+        android:textStyle="normal" />
+
+</LinearLayout>

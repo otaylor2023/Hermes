@@ -5,9 +5,24 @@
     android:layout_height="match_parent"
     tools:context=".FeedFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView12"
+            style="@style/crime_label_styles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Event Feed"
+            android:textSize="20sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/crime_feed_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>
