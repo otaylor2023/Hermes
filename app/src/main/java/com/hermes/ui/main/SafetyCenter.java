@@ -29,7 +29,12 @@ import android.widget.TextView;
 import com.hermes.PlaceholderFragment;
 import com.hermes.R;
 import com.hermes.databinding.FragmentSOSBinding;
+import com.hermes.databinding.FragmentSafetyCenterBinding;
 import com.hermes.databinding.FragmentTabsBinding;
+import com.hermes.storage.ContactPOJO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,10 +47,11 @@ public class SafetyCenter extends Fragment {
     private static final String TAG = "mercury.safetycenter";
 
     private PageViewModel pageViewModel;
-    private FragmentSOSBinding binding;
+    private @NonNull FragmentSafetyCenterBinding binding;
     EditText editText;
     Button add;
     RecyclerView recyclerView;
+    List<ContactPOJO> dataList = new ArrayList<>();
 
     public static SafetyCenter newInstance(int index) {
         SafetyCenter fragment = new SafetyCenter();
@@ -71,7 +77,7 @@ public class SafetyCenter extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
-        binding = FragmentSOSBinding.inflate(inflater, container, false);
+        binding = FragmentSafetyCenterBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         editText = root.findViewById(R.id.edit_text);
         add = root.findViewById(R.id.bt_add);
