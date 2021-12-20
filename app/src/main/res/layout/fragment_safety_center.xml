@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tool="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.SafetyCenter"
     android:orientation="vertical">
 
@@ -10,11 +11,10 @@
    <EditText
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:i="@+id/edit_text"
+       android:id="@+id/edit_text"
        android:hint="Enter text"
        android:padding ="12dp"
-       android:background="@android:drawable/editbox_background"
-       />
+       android:background="@android:drawable/editbox_background" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/bt_add"
-            android:text="Add" />
+            android:text="Add Emergency Contact" />
+
 
 
     </LinearLayout>
@@ -37,9 +38,6 @@
         android:layout_height="match_parent"
         android:id="@+id/recycler_view"
         android:layout_marginTop="8dp"
-        tools:listitem="@layout/list_row_main"
-
-
-
+        tools:listitem="@layout/list_row_main"/>
 
 </LinearLayout>
