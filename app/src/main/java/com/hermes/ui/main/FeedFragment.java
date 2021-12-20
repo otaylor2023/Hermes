@@ -16,6 +16,7 @@ import com.hermes.MarkerData;
 import com.hermes.R;
 import com.hermes.databinding.FragmentFeedBinding;
 import com.hermes.storage.HermesStorage;
+import com.hermes.storage.LocalStorage;
 import com.hermes.storage.OnMarkersReceivedCallback;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class FeedFragment extends Fragment {
     private FragmentFeedBinding binding;
     private RecyclerView recyclerView;
     private FeedAdapter adapter;
+
 
     public static FeedFragment newInstance(int index) {
         FeedFragment fragment = new FeedFragment();
@@ -47,12 +49,15 @@ public class FeedFragment extends Fragment {
         View root = binding.getRoot();
 
         recyclerView = root.findViewById(R.id.crime_feed_recycler);
+
+
         (new HermesStorage()).getMarkers(new OnMarkersReceivedCallback() {
             @Override
             public void onReceived(@NonNull List<MarkerData> markerDataList) {
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 adapter = new FeedAdapter(markerDataList);
+                recyclerView.setAdapter(adapter);
                 Log.d(TAG, "item number: " + adapter.getItemCount());
             }
         });

@@ -37,7 +37,6 @@ import com.hermes.databinding.FragmentSafetyCenterBinding;
 import com.hermes.databinding.FragmentTabsBinding;
 import com.hermes.storage.ContactPOJO;
 import com.hermes.storage.LocalStorage;
-import com.hermes.storage.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,12 +94,19 @@ public class SafetyCenter extends Fragment  implements RecyclerViewAdapter.ItemC
         adapter = new RecyclerViewAdapter(getContext(), dataList);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
+        updateContactList(root);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(getActivity(), AddNewContact.class);
+                updateContactList(root);
                 startActivity(intent);
+                updateContactList(root);
+                //dataList = LocalStorage.getContactList(root);
+
+
+
             }
         });
 //        final TextView textView = binding.sectionLabel;
@@ -115,6 +121,16 @@ public class SafetyCenter extends Fragment  implements RecyclerViewAdapter.ItemC
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getActivity(), "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+        updateContactList(view);
+        Toast.makeText(getActivity(), dataList.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    public void updateContactList(View view){
+        dataList = LocalStorage.getContactList(view);
+        adapter.notifyDataSetChanged();
+        adapter.notifyItemRangeChanged(dataList.size()-1, dataList.size());
+    }
+    public List<ContactPOJO> getData(){
+        return dataList;
     }
 }
