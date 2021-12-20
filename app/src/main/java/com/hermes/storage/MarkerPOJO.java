@@ -1,6 +1,7 @@
-package com.hermes;
+package com.hermes.storage;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.hermes.MarkerData;
 
 import java.util.Date;
 

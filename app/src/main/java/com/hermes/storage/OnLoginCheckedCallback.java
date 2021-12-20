@@ -1,4 +1,6 @@
-package com.hermes;
+package com.hermes.storage;
+
+import com.hermes.storage.OrgPOJO;
 
 public interface OnLoginCheckedCallback {
 

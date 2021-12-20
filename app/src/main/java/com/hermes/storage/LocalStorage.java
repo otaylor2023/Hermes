@@ -1,4 +1,4 @@
-package com.hermes;
+package com.hermes.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,14 +6,6 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Scanner;
 
 public class LocalStorage {
 
