@@ -15,4 +15,5 @@
         <item name="android:layout_width">139dp</item>
     </style>
 
+    <dimen name="signInEdge">40dp</dimen>
 </resources>

@@ -30,7 +30,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".tabs"
+            android:name=".TabbedActivity"
             android:exported="true"
             android:label="@string/title_activity_tabs"
             android:theme="@style/Theme.Hermesbuild.NoActionBar"
