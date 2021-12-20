@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="burglary">Burglary</string>
+    <string name="spinner_default">Select an offense</string>
     <string name="assault">Assault</string>
     <string name="robbery">Robbery</string>
     <string name="auto_theft">Auto theft</string>
@@ -9,16 +9,15 @@
     <string name="murder">Murder</string>
     <string name="sexual_assault">Sexual assault</string>
 
-    <color name="burglary">#FFFFFF</color>
-    <color name="assault">#FFFFFF</color>
-    <color name="robbery">#FFFFFF</color>
-    <color name="auto_theft">#FFFFFF</color>
-    <color name="mugging">#FFFFFF</color>
-    <color name="murder">#FFFFFF</color>
-    <color name="sexual_assault">#FFFFFF</color>
+    <color name="assault">#871F1F</color>
+    <color name="robbery">#35DCD6</color>
+    <color name="auto_theft">#67A321</color>
+    <color name="mugging">#F6E763</color>
+    <color name="murder">#FB1C7C</color>
+    <color name="sexual_assault">#317A71</color>
 
     <string-array name="crime_array">
-        <item>@string/burglary</item>
+        <item>@string/spinner_default</item>
         <item>@string/assault</item>
         <item>@string/robbery</item>
         <item>@string/auto_theft</item>

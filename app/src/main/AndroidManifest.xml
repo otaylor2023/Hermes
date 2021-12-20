@@ -36,7 +36,8 @@
             android:name=".tabs"
             android:exported="true"
             android:label="@string/title_activity_tabs"
-            android:theme="@style/Theme.Hermesbuild.NoActionBar">
+            android:theme="@style/Theme.Hermesbuild.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
