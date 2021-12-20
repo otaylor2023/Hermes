@@ -3,9 +3,12 @@
     <string name="title_activity_maps">MapsActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="tab_text_1">Map</string>
-    <string name="tab_text_2">SOS</string>
+    <string name="tab_text_1">SOS</string>
+    <string name="tab_text_2">Map</string>
     <string name="tab_text_3">Feed</string>
     <string name="tab_text_4">Safety Center</string>
     <string name="title_activity_tabs">tabs</string>
+    <string name="hint_word">Contact Name...</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Word not saved because it is empty.</string>
 </resources>

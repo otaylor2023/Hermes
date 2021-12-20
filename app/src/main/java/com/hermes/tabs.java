@@ -52,20 +52,7 @@ public class tabs extends AppCompatActivity {
 //        });
     }
 
-    public void sendEmergencyMessages(View view) {
-        String sPhone = "9738735376";
-        String etMessage = "Test";
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(sPhone, null, etMessage, null, null);
 
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-    }
 
     // region maps methods
 //

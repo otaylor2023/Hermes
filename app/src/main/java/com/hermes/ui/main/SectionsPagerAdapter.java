@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.hermes.MapsFragment;
 import com.hermes.PlaceholderFragment;
 import com.hermes.R;
+import com.hermes.SafetyCenter;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -42,7 +43,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         else if(position == 2)
             return PlaceholderFragment.newInstance(position + 1);
         else
-            return PlaceholderFragment.newInstance(position + 1);
+            return SafetyCenter.newInstance(position + 1);
     }
 
     @Nullable
