@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +38,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         ContactPOJO contact = mData.get(position);
         holder.myTextView.setText(contact.getName());
+        holder.btDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                System.out.println("Deleting Contact");
+                LocalStorage.deleteContact(view, contact.getName());
+                mData = LocalStorage.getContactList(view);
+                System.out.println(LocalStorage.getContactList(view));
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, mData.size());
+            }
+        });
     }
 
     // total number of rows
@@ -49,11 +61,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView myTextView;
-
+        ImageView btEdit, btDelete;
         ViewHolder(View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.text_view);
             itemView.setOnClickListener(this);
+            btEdit = itemView.findViewById(R.id.bt_edit);
+            btDelete = itemView.findViewById(R.id.bt_delete);
+
         }
 
         @Override
