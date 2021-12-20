@@ -68,7 +68,7 @@ public class LocalStorage {
 
     public static List<ContactPOJO> getContactList(View view) {
         Map<String, ContactPOJO> contactMap = getContactMap(view);
-        return (List<ContactPOJO>) contactMap.values();
+        return new ArrayList<>(contactMap.values());
     }
 
     public static ContactPOJO findContact(View view, String name) {
