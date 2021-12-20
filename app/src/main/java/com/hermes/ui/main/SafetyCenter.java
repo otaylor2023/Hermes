@@ -53,5 +53,5 @@ public class SafetyCenter extends Fragment {
         pageViewModel.setIndex(index);
     }
 
-    @
+
 }

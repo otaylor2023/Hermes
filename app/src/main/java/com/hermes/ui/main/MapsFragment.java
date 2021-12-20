@@ -1,4 +1,4 @@
-package com.hermes;
+package com.hermes.ui.main;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -31,9 +31,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.hermes.HermesUtils;
+import com.hermes.MarkerData;
+import com.hermes.R;
 import com.hermes.storage.HermesStorage;
+import com.hermes.storage.LocalStorage;
 import com.hermes.storage.MarkerPOJO;
 import com.hermes.storage.OnMarkersReceivedCallback;
+import com.hermes.storage.OrgPOJO;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -276,7 +281,7 @@ public class MapsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Spinner spinner = directionView.findViewById(R.id.crimeSpinner);
-                if (spinner.getSelectedItemId() == R.string.spinner_default || markerData.getDate() == null) {
+                if (spinner.getSelectedItem().equals(getResources().getString(R.string.spinner_default)) || markerData.getDate() == null) {
                     // TODO: 12/19/21 make this highlight the unfilled fields in red
                     return;
                 }
@@ -287,10 +292,12 @@ public class MapsFragment extends Fragment {
 
                 String description = descriptionBox.getText().toString();
                 markerData.setDescription(description);
+                OrgPOJO orgPOJO = LocalStorage.getCurrentUser(view);
+                if (orgPOJO != null) {
+                    markerData.setOrganization(orgPOJO.getDisplayName());
+                }
 //                markerData.setResources(selectedStr);
                 markerData.setLocation(marker.getPosition());
-                Log.d(TAG, "SET long: " + marker.getPosition().longitude
-                        + "lat: " + marker.getPosition().latitude);
                 MarkerOptions markerOptions = createMarker(markerData, view);
                 mMap.addMarker(markerOptions);
                 markerStorage.addMarker(new MarkerPOJO(markerData));
@@ -325,7 +332,8 @@ public class MapsFragment extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.US);
         String dateStr = dateFormat.format(markerData.getDate().getTime());
 //        return dateStr + "\n" + dateStr;
-        return "Date: " + dateStr + "\n User description: " + markerData.getDescription();
+        String orgStr = (markerData.getOrganization() != null) ? "Organization: " + markerData.getOrganization() + "\n" : "";
+        return String.format("Date: %s \n%sUser description: %s", dateStr, orgStr, markerData.getDescription());
     }
 
     public void showDatePickerDialog(View v, Button button, MarkerData markerData) {

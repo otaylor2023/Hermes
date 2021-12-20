@@ -10,18 +10,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
+import com.hermes.HermesUtils;
+import com.hermes.R;
 import com.hermes.storage.HermesStorage;
 import com.hermes.storage.LocalStorage;
 import com.hermes.storage.OnLoginCheckedCallback;
 import com.hermes.storage.OrgPOJO;
-import com.hermes.ui.main.SectionsPagerAdapter;
 import com.hermes.databinding.ActivityTabsBinding;
+import com.hermes.ui.main.MapsFragment;
+import com.hermes.ui.main.SectionsPagerAdapter;
 
 public class TabbedActivity extends AppCompatActivity {
 

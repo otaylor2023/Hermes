@@ -1,4 +1,4 @@
-package com.hermes;
+package com.hermes.ui.main;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 
 import androidx.fragment.app.DialogFragment;
+
+import com.hermes.MarkerData;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

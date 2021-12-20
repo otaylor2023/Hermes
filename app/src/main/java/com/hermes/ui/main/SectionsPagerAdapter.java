@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.hermes.MapsFragment;
 import com.hermes.PlaceholderFragment;
 import com.hermes.R;
 
@@ -36,7 +35,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         else if(position == 1)
             return MapsFragment.newInstance(position + 1);
         else if(position == 2)
-            return PlaceholderFragment.newInstance(position + 1);
+            return FeedFragment.newInstance(position + 1);
         else
             return SafetyCenter.newInstance(position + 1);
     }

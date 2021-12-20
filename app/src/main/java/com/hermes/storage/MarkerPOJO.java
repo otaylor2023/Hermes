@@ -12,6 +12,7 @@ public class MarkerPOJO {
     private String description;
     private int stringRes;
     private int colorRes;
+    private String organization;
 
     public MarkerPOJO() {}
 
@@ -22,6 +23,7 @@ public class MarkerPOJO {
         this.description = markerData.getDescription();
         this.stringRes = markerData.getCrimeType().getNameRes();
         this.colorRes = markerData.getCrimeType().getHueRes();
+        this.organization = markerData.getOrganization();
     }
 
     public Date getDate() {
@@ -70,5 +72,13 @@ public class MarkerPOJO {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(String organization) {
+        this.organization = organization;
     }
 }

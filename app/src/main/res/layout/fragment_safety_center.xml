@@ -10,7 +10,7 @@
    <EditText
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:i="@+id/edit_text"
+       android:id="@+id/edit_text"
        android:hint="Enter text"
        android:padding ="12dp"
        android:background="@android:drawable/editbox_background"
@@ -37,7 +37,7 @@
         android:layout_height="match_parent"
         android:id="@+id/recycler_view"
         android:layout_marginTop="8dp"
-        tools:listitem="@layout/list_row_main"
+        tools:listitem="@layout/list_row_main"/>
 
 
 

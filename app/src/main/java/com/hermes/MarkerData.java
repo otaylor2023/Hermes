@@ -7,6 +7,7 @@ import androidx.core.graphics.ColorUtils;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.hermes.storage.MarkerPOJO;
+import com.hermes.storage.OrgPOJO;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -19,6 +20,7 @@ public class MarkerData {
 //    private long idField;
     private CrimeType crimeType;
     private LatLng location;
+    private String organization;
     private static final String TAG = "mercury.markerdata";
     private static HashMap<String, CrimeType> crimeTypeHashMap;
 
@@ -29,6 +31,7 @@ public class MarkerData {
         this.description = markerPOJO.getDescription();
         this.crimeType = getCrimeType(markerPOJO.getStringRes());
         this.location = new LatLng(markerPOJO.getLatitude(), markerPOJO.getLongitude());
+        this.organization = markerPOJO.getOrganization();
     }
 
 
@@ -121,4 +124,11 @@ public class MarkerData {
     }
 
 
+    public String getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
 }
