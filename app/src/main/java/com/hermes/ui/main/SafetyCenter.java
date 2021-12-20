@@ -28,6 +28,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hermes.AddNewContact;
+import com.hermes.HermesUtils;
 import com.hermes.PlaceholderFragment;
 import com.hermes.R;
 import com.hermes.databinding.FragmentSOSBinding;
@@ -84,7 +86,8 @@ public class SafetyCenter extends Fragment  implements RecyclerViewAdapter.ItemC
 
         binding = FragmentSafetyCenterBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        editText = root.findViewById(R.id.edit_text);
+        HermesUtils.createFakeContacts(root);
+
         add = root.findViewById(R.id.bt_add);
         recyclerView = root.findViewById(R.id.recycler_view);
         dataList = LocalStorage.getContactList(root);
@@ -93,6 +96,13 @@ public class SafetyCenter extends Fragment  implements RecyclerViewAdapter.ItemC
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getActivity(), AddNewContact.class);
+                startActivity(intent);
+            }
+        });
 //        final TextView textView = binding.sectionLabel;
         pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
