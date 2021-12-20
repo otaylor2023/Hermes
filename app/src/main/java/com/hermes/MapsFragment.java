@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 
 public class MapsFragment extends Fragment {
@@ -120,9 +121,14 @@ public class MapsFragment extends Fragment {
             });
 
             markerStorage = new MarkerStorage();
-            for (MarkerData markerData : markerStorage.getMarkers()) {
-                mMap.addMarker(createMarker(markerData, getView()));
-            }
+            markerStorage.getMarkers(new OnMarkersReceivedCallback() {
+                @Override
+                public void onReceived(@NonNull List<MarkerData> markerDataList) {
+                    for (MarkerData markerData : markerDataList) {
+                        mMap.addMarker(createMarker(markerData, getView()));
+                    }
+                }
+            });
 
             LatLng sydney = new LatLng(-34, 151);
             googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker out Sydney"));
@@ -297,7 +303,7 @@ public class MapsFragment extends Fragment {
                         + "lat: " + marker.getPosition().latitude);
                 MarkerOptions markerOptions = createMarker(markerData, view);
                 mMap.addMarker(markerOptions);
-                markerStorage.addMarker(markerData);
+                markerStorage.addMarker(new MarkerPOJO(markerData));
                 infoWindow.dismiss();
 
 

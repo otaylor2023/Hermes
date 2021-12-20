@@ -8,18 +8,27 @@ import androidx.core.graphics.ColorUtils;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Arrays;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class MarkerData {
 
-    private Calendar date;
+    private Date date;
     private String description;
 //    private long idField;
     private CrimeType crimeType;
     private LatLng location;
     private static final String TAG = "mercury.markerdata";
     private static HashMap<String, CrimeType> crimeTypeHashMap;
+
+    public MarkerData() {}
+
+    public MarkerData(MarkerPOJO markerPOJO) {
+        this.date = markerPOJO.getDate();
+        this.description = markerPOJO.getDescription();
+        this.crimeType = getCrimeType(markerPOJO.getStringRes());
+        this.location = new LatLng(markerPOJO.getLatitude(), markerPOJO.getLongitude());
+    }
 
 
 //    private Organization organization;
@@ -76,12 +85,16 @@ public class MarkerData {
         this.description = description;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
+    }
+
+    public CrimeType getCrimeType() {
+        return crimeType;
     }
 
     public static CrimeType getCrimeType(String crimeName, View view) {
@@ -97,35 +110,14 @@ public class MarkerData {
 
     }
 
-
-
-    public enum CrimeType {
-
-        ASSAULT(R.string.assault, R.color.assault),
-        ROBBERY(R.string.robbery, R.color.robbery),
-        AUTO_THEFT(R.string.auto_theft, R.color.auto_theft),
-        MUGGING(R.string.mugging, R.color.mugging),
-        MURDER(R.string.murder, R.color.murder),
-        SEXUAL_ASSAULT(R.string.sexual_assault, R.color.sexual_assault);
-
-        private int hueRes;
-        private int nameRes;
-
-
-        CrimeType(int nameRes, int hueRes) {
-            this.nameRes = nameRes;
-            this.hueRes = hueRes;
+    public static CrimeType getCrimeType(int crimeNameRes) {
+        for (CrimeType crimeType : CrimeType.values()) {
+            if (crimeType.getNameRes() == crimeNameRes) {
+                return crimeType;
+            }
         }
-
-        public int getHueRes() {
-            return hueRes;
-        }
-
-        public int getNameRes() {
-            return nameRes;
-        }
-
-
-
+        return null;
     }
+
+
 }

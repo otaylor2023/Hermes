@@ -38,12 +38,12 @@ public class DatePickerFragment extends DialogFragment
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
-
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, day);
+
         SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.US);
         String dateStr = format.format(cal.getTime());
         button.setText(dateStr);
-        markerData.setDate(cal);
+        markerData.setDate(cal.getTime());
     }
 }
