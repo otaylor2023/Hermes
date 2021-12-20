@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -45,7 +43,7 @@ public class MapsFragment extends Fragment {
     private static String TAG = "mercury.maps_fragment";
     //private Toolbar toolbar;
     private GoogleMap mMap;
-    private MarkerStorage markerStorage;
+    private HermesStorage markerStorage;
 
     public static MapsFragment newInstance(int index) {
         MapsFragment fragment = new MapsFragment();
@@ -120,7 +118,7 @@ public class MapsFragment extends Fragment {
                 }
             });
 
-            markerStorage = new MarkerStorage();
+            markerStorage = new HermesStorage();
             markerStorage.getMarkers(new OnMarkersReceivedCallback() {
                 @Override
                 public void onReceived(@NonNull List<MarkerData> markerDataList) {
@@ -265,18 +263,7 @@ public class MapsFragment extends Fragment {
         });
 
         EditText descriptionBox = directionView.findViewById(R.id.descriptionBox);
-        View.OnFocusChangeListener ofcListener = new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(view.getId() == R.id.descriptionBox && !b) {
-
-                    InputMethodManager imm =  (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                }
-            }
-        };
-
-        descriptionBox.setOnFocusChangeListener(ofcListener);
+        descriptionBox.setOnFocusChangeListener(HermesUtils.getTextFocusListener(R.id.descriptionBox));
 
 //        Spinner spinner = directionView.findViewById(R.id.crimeSpinner);
 //        Log.d(TAG, "spinner null? " + (spinner == null));
