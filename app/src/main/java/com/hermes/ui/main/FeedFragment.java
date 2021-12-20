@@ -12,19 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hermes.FeedAdapter;
 import com.hermes.MarkerData;
-import com.hermes.PlaceholderFragment;
 import com.hermes.R;
 import com.hermes.databinding.FragmentFeedBinding;
-import com.hermes.databinding.FragmentSafetyCenterBinding;
-import com.hermes.storage.ContactPOJO;
 import com.hermes.storage.HermesStorage;
-import com.hermes.storage.LocalStorage;
 import com.hermes.storage.OnMarkersReceivedCallback;
-import com.hermes.storage.RecyclerViewAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FeedFragment extends Fragment {
