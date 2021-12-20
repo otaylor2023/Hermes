@@ -3,10 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/activity_maps.xml" value="0.5359375" />
-        <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/activity_tabs.xml" value="0.5359375" />
-        <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/fragment_s_o_s.xml" value="0.5359375" />
-        <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/fragment_tabs.xml" value="0.5359375" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/button_background.xml" value="0.3728205128205128" />
         <entry key="app/src/main/res/drawable/cancelbutton.xml" value="0.36205128205128206" />
@@ -18,6 +14,7 @@
         <entry key="app/src/main/res/layout/crime_details_window.xml" value="0.2986506029579807" />
         <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.18125" />
         <entry key="app/src/main/res/layout/fragment_tabs.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/map_info_window.xml" value="0.45428697656824313" />
       </map>
     </option>
   </component>
