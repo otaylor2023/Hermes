@@ -1,9 +1,11 @@
 package com.hermes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import com.hermes.storage.HermesStorage;
+import com.hermes.storage.OrgPOJO;
 
 import java.security.NoSuchAlgorithmException;
 

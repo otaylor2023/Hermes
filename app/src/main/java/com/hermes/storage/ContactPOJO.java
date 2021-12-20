@@ -1,4 +1,4 @@
-package com.hermes;
+package com.hermes.storage;
 
 public class ContactPOJO {
 

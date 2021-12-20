@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.core.graphics.ColorUtils;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.hermes.storage.MarkerPOJO;
 
 import java.util.Arrays;
 import java.util.Date;

@@ -31,6 +31,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.hermes.storage.HermesStorage;
+import com.hermes.storage.MarkerPOJO;
+import com.hermes.storage.OnMarkersReceivedCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
