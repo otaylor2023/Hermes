@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.telephony.SmsManager;
@@ -25,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hermes.PlaceholderFragment;
 import com.hermes.R;
@@ -32,6 +34,8 @@ import com.hermes.databinding.FragmentSOSBinding;
 import com.hermes.databinding.FragmentSafetyCenterBinding;
 import com.hermes.databinding.FragmentTabsBinding;
 import com.hermes.storage.ContactPOJO;
+import com.hermes.storage.LocalStorage;
+import com.hermes.storage.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +45,7 @@ import java.util.List;
  * Use the {@link SafetyCenter#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SafetyCenter extends Fragment {
+public class SafetyCenter extends Fragment  implements RecyclerViewAdapter.ItemClickListener{
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static final String TAG = "mercury.safetycenter";
@@ -52,6 +56,7 @@ public class SafetyCenter extends Fragment {
     Button add;
     RecyclerView recyclerView;
     List<ContactPOJO> dataList = new ArrayList<>();
+    RecyclerViewAdapter adapter;
 
     public static SafetyCenter newInstance(int index) {
         SafetyCenter fragment = new SafetyCenter();
@@ -82,6 +87,11 @@ public class SafetyCenter extends Fragment {
         editText = root.findViewById(R.id.edit_text);
         add = root.findViewById(R.id.bt_add);
         recyclerView = root.findViewById(R.id.recycler_view);
+        dataList = LocalStorage.getContactList(root);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new RecyclerViewAdapter(getContext(), dataList);
+        adapter.setClickListener(this);
+        recyclerView.setAdapter(adapter);
 
 //        final TextView textView = binding.sectionLabel;
         pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -94,95 +104,7 @@ public class SafetyCenter extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        Button messageButton = view.findViewById(R.id.messageButton);
-        messageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if(ContextCompat.checkSelfPermission(
-                            getContext(), Manifest.permission.SEND_SMS) ==
-                            PackageManager.PERMISSION_GRANTED) {
-                        sendEmergencyMessages(view);
-                    }
-                    else{
-                        requestPermissionLauncher.launch(
-                                Manifest.permission.SEND_SMS);
-                    }
-                }
-                //sendEmergencyMessages(view);
-            }
-        });
-
-
-        Button fakeCall = view.findViewById(R.id.fakeCall);
-        fakeCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if(ContextCompat.checkSelfPermission(
-                            getContext(), Manifest.permission.CALL_PHONE) ==
-                            PackageManager.PERMISSION_GRANTED) {
-                        makePhoneCall(view);
-                    }
-                    else{
-                        requestPermissionLauncher.launch(
-                                Manifest.permission.CALL_PHONE);
-                    }
-                }
-                //sendEmergencyMessages(view);
-            }
-        });
-
+    public void onItemClick(View view, int position) {
+        Toast.makeText(getActivity(), "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-
-    private ActivityResultLauncher<String> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    // Permission is granted. Continue the action or workflow in your
-                    // app.
-                } else {
-                    // Explain to the user that the feature is unavailable because the
-                    // features requires a permission that the user has denied. At the
-                    // same time, respect the user's decision. Don't link to system
-                    // settings in an effort to convince the user to change their
-                    // decision.
-                }
-            });
-
-    public void makePhoneCall(View view){
-        String number = "9738735376";
-        Intent i = new Intent(Intent.ACTION_CALL);
-        i.setData(Uri.parse("tel:"+number));
-        startActivity(i);
-    }
-
-    public void sendEmergencyMessages(View view) {
-        String sPhone = "9738735376";
-        String etMessage = "Test";
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(sPhone, null, etMessage, null, null);
-
-        //Toast.makeText(getApplicationContext(), "SMS sent.",
-        //      Toast.LENGTH_LONG).show();
-    }
-
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-
-
 }

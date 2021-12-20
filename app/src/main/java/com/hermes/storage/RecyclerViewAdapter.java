@@ -19,7 +19,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    RecyclerViewAdapter(Context context, List<ContactPOJO> data) {
+    public RecyclerViewAdapter(Context context, List<ContactPOJO> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -62,12 +62,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     // convenience method for getting data at click position
-    String getItem(int id) {
+    public String getItem(int id) {
         return mData.get(id).getName();
     }
 
     // allows clicks events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
