@@ -58,28 +58,38 @@ public class TabbedActivity extends AppCompatActivity {
 //        });
 
         final View rootView = getWindow().getDecorView().getRootView();
-        rootView.getViewTreeObserver().addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
 
-                    @Override
-                    public void onGlobalLayout() {
-
-                        //by now all views will be displayed with correct values
-                        hermesStorage = new HermesStorage();
+        //by now all views will be displayed with correct values
+        hermesStorage = new HermesStorage();
 //                        LocalStorage.signUserOut(rootView);
-                        setCurrentUser(LocalStorage.getCurrentUser(rootView));
+//        HermesUtils.createFakeContacts(rootView);
+//        LocalStorage.deleteContact(rootView, "person1");
+//        LocalStorage.deleteContact(rootView, "person2");
+//        LocalStorage.deleteContact(rootView, "person3");
+        HermesUtils.viewContacts(rootView);
+        setCurrentUser(LocalStorage.getCurrentUser(rootView));
 //                        HermesUtils.createFakeOrg();
 
-                        rootView.findViewById(R.id.signInButton).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                beginSignIn(view);
-                            }
-                        });
+        rootView.findViewById(R.id.signInButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                beginSignIn(view);
+            }
+        });
 
-                    }
-                });
+//        rootView.getViewTreeObserver().addOnGlobalLayoutListener(
+//                new ViewTreeObserver.OnGlobalLayoutListener() {
+//
+//                    @Override
+//                    public void onGlobalLayout() {
+//
+//
+//
+//                    }
+//                });
     }
+
+
 
 
     public void beginSignIn(View mainView) {

@@ -7,6 +7,11 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class LocalStorage {
 
 
@@ -38,8 +43,50 @@ public class LocalStorage {
     }
 
 
+    public static void saveContact(View view, ContactPOJO contactPOJO) {
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(contactPOJO);
+
+        SharedPreferences sharedPreferences = view.getContext().getSharedPreferences(LocalLocations.CONTACTS.path, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(contactPOJO.getName(), jsonString);
+        editor.apply();
+    }
+
+    public static Map<String, ContactPOJO> getContactMap(View view) {
+        Map<String, ContactPOJO> contactMao = new HashMap<>();
+        SharedPreferences sharedPreferences = view.getContext().getSharedPreferences(LocalLocations.CONTACTS.path, Context.MODE_PRIVATE);
+        Map<String, String> jsonList = (Map<String, String>) sharedPreferences.getAll();
+
+        for (String key : jsonList.keySet()) {
+            Gson gson = new Gson();
+            ContactPOJO contactPOJO = gson.fromJson(jsonList.get(key), ContactPOJO.class);
+            contactMao.put(key, contactPOJO);
+        }
+        return contactMao;
+    }
+
+    public static List<ContactPOJO> getContactList(View view) {
+        Map<String, ContactPOJO> contactMap = getContactMap(view);
+        return (List<ContactPOJO>) contactMap.values();
+    }
+
+    public static ContactPOJO findContact(View view, String name) {
+        Map<String, ContactPOJO> contactMap = getContactMap(view);
+        return contactMap.get(name);
+    }
+
+    public static void deleteContact(View view, String name) {
+        SharedPreferences sharedPreferences = view.getContext().getSharedPreferences(LocalLocations.CONTACTS.path, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(name);
+        editor.apply();
+    }
+
+
     public enum LocalLocations {
-        ORGANIZATION("user_file", "current_user");
+        ORGANIZATION("user_file", "current_user"),
+        CONTACTS("user_contacts", null);
 
         public final String path;
         public final String key;

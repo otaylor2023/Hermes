@@ -1,6 +1,16 @@
 package com.hermes.storage;
 
+import androidx.annotation.NonNull;
+
 public class ContactPOJO {
+
+    public ContactPOJO() {}
+
+    public ContactPOJO(String name, String number, String message) {
+        this.name = name;
+        this.number = number;
+        this.message = message;
+    }
 
     private String name;
     private String number;
@@ -28,5 +38,10 @@ public class ContactPOJO {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @NonNull
+    public String toString() {
+        return String.format("[%s, %s, %s]", name, number, message);
     }
 }
