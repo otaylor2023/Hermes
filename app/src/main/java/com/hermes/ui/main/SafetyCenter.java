@@ -1,41 +1,26 @@
 package com.hermes.ui.main;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hermes.PlaceholderFragment;
 import com.hermes.R;
-import com.hermes.databinding.FragmentSOSBinding;
 import com.hermes.databinding.FragmentSafetyCenterBinding;
-import com.hermes.databinding.FragmentTabsBinding;
 import com.hermes.storage.ContactPOJO;
 import com.hermes.storage.LocalStorage;
-import com.hermes.storage.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.hermes.storage;
+package com.hermes.ui.main;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hermes.R;
+import com.hermes.storage.ContactPOJO;
 
 import java.util.List;
 

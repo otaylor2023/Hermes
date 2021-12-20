@@ -1,4 +1,4 @@
-package com.hermes;
+package com.hermes.ui.main;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +7,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hermes.storage.MarkerPOJO;
+import com.hermes.MarkerData;
+import com.hermes.R;
 
 import java.util.List;
 
