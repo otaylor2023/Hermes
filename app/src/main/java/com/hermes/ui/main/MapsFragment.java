@@ -329,8 +329,8 @@ public class MapsFragment extends Fragment {
     }
 
     public String createSnippet(MarkerData markerData) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.US);
-        String dateStr = dateFormat.format(markerData.getDate().getTime());
+        String dateStr = markerData.getDateStr();
+
 //        return dateStr + "\n" + dateStr;
         String orgStr = (markerData.getOrganization() != null) ? "Organization: " + markerData.getOrganization() + "\n" : "";
         return String.format("Date: %s \n%sUser description: %s", dateStr, orgStr, markerData.getDescription());

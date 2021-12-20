@@ -9,9 +9,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.hermes.storage.MarkerPOJO;
 import com.hermes.storage.OrgPOJO;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class MarkerData {
 
@@ -130,5 +132,10 @@ public class MarkerData {
 
     public void setOrganization(String organization) {
         this.organization = organization;
+    }
+
+    public String getDateStr() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.US);
+        return dateFormat.format(this.getDate().getTime());
     }
 }
