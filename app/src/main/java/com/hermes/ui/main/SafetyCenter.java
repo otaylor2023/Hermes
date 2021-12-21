@@ -35,6 +35,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hermes.AddNewContact;
 import com.hermes.HermesUtils;
 import com.hermes.PlaceholderFragment;
@@ -61,7 +62,7 @@ public class SafetyCenter extends Fragment  implements RecyclerViewAdapter.ItemC
     private PageViewModel pageViewModel;
     private @NonNull FragmentSafetyCenterBinding binding;
     EditText editText;
-    Button add;
+    FloatingActionButton add;
     RecyclerView recyclerView;
     List<ContactPOJO> dataList = new ArrayList<>();
     RecyclerViewAdapter adapter;

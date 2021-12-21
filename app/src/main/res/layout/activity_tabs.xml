@@ -38,7 +38,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="5dp"
                 android:layout_marginVertical="5dp"
-                android:fontFamily="@font/redhat"
+                android:fontFamily="sans-serif"
                 android:gravity="center|center_horizontal|center_vertical"
                 android:text="sign in" />
 
@@ -61,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             tools:ignore="SpeakableTextPresentCheck" />
+
     </androidx.viewpager.widget.ViewPager>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

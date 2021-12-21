@@ -5,7 +5,6 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="tttt"
     tools:context=".ui.main.SOS">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,87 +14,98 @@
         style="@style/crime_label_styles"
         android:layout_width="262dp"
         android:layout_height="104dp"
-        android:fontFamily="@font/redhat"
+        android:fontFamily="sans-serif"
         android:text="Sends a fake call to your phone for safety \n in dangerous areas."
+        android:textColor="#000000"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintVertical_bias="0.889" />
+        app:layout_constraintVertical_bias="0.947" />
 
     <Button
         android:id="@+id/panicButton"
         style="@style/crime_label_styles"
-        android:layout_width="185dp"
-        android:layout_height="72dp"
-        android:fontFamily="@font/redhat"
+        android:layout_width="242dp"
+        android:layout_height="87dp"
+        android:fontFamily="sans-serif"
         android:text="PANIC BUTTON"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/messageButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintVertical_bias="0.087" />
 
     <Button
         android:id="@+id/messageButton"
         style="@style/crime_label_styles"
-        android:layout_width="185dp"
-        android:layout_height="72dp"
+        android:layout_width="244dp"
+        android:layout_height="92dp"
         android:layout_marginBottom="152dp"
-        android:fontFamily="@font/redhat"
+        android:fontFamily="sans-serif"
         android:text="MESSAGE BUTTON"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53" />
+        app:layout_constraintVertical_bias="0.552" />
 
     <Button
         android:id="@+id/checkIn"
-        android:layout_width="185dp"
-        android:layout_height="72dp"
+        android:layout_width="238dp"
+        android:layout_height="91dp"
         android:layout_marginBottom="116dp"
-        android:fontFamily="@font/redhat"
         android:text="Check In Button"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#838383"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.911" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/redhat"
         android:text="Calls 911 \n Sends Emergency Messages to: \n 1. \n 2. \n 3."
         android:textColor="#000000"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.171" />
+        app:layout_constraintVertical_bias="0.176" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/redhat"
         android:text="Sends Emergency Messages to: \n 1. \n 2. \n 3."
         android:textColor="#000000"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.515" />
+        app:layout_constraintVertical_bias="0.54" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
