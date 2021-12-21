@@ -20,8 +20,8 @@ public class AddNewContact extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_contact);
         name = findViewById(R.id.edit1);
-        name = findViewById(R.id.edit2);
-        name = findViewById(R.id.edit3);
+        number = findViewById(R.id.edit2);
+        message = findViewById(R.id.edit3);
         saveButton = findViewById(R.id.saveContact);
         cancelButton = findViewById(R.id.bt_cancel);
         saveButton.setOnClickListener(new View.OnClickListener() {
