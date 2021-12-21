@@ -1,6 +1,7 @@
 package com.hermes.ui.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hermes.AddNewContact;
 import com.hermes.R;
 import com.hermes.storage.ContactPOJO;
 import com.hermes.storage.LocalStorage;
@@ -38,7 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ContactPOJO contact = mData.get(position);
-        holder.myTextView.setText(contact.getName());
+        holder.myTextView.setText(contact.getName() + "\n" + contact.getNumber() + "\n" + contact.getMessage());
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -50,6 +52,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 notifyItemRangeChanged(position, mData.size());
             }
         });
+
+
     }
 
     // total number of rows
@@ -67,7 +71,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
             myTextView = itemView.findViewById(R.id.text_view);
             itemView.setOnClickListener(this);
-            btEdit = itemView.findViewById(R.id.bt_edit);
             btDelete = itemView.findViewById(R.id.bt_delete);
 
         }

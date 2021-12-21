@@ -11,26 +11,27 @@
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="243dp"
-        android:layout_height="34dp"
+        android:layout_width="262dp"
+        android:layout_height="104dp"
         android:text="Sends a fake call to your phone for safety \n in dangerous areas."
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.57"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.909" />
+        app:layout_constraintVertical_bias="0.92" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/panicButton"
         android:layout_width="185dp"
         android:layout_height="72dp"
         android:text="Panic Button"
         app:layout_constraintBottom_toTopOf="@+id/messageButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.145" />
 
     <Button
         android:id="@+id/messageButton"
@@ -42,19 +43,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67" />
+        app:layout_constraintVertical_bias="0.53" />
 
     <Button
         android:id="@+id/fakeCall"
         android:layout_width="185dp"
         android:layout_height="72dp"
         android:layout_marginBottom="116dp"
-        android:text="Fake Call Button"
+        android:text="Check In Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.994" />
+        app:layout_constraintVertical_bias="0.911" />
 
     <TextView
         android:id="@+id/textView5"
@@ -67,7 +68,7 @@
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.335" />
+        app:layout_constraintVertical_bias="0.171" />
 
     <TextView
         android:id="@+id/textView6"
@@ -79,6 +80,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.643" />
+        app:layout_constraintVertical_bias="0.515" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

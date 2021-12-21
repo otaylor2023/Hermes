@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -24,7 +25,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.hermes.R;
 import com.hermes.databinding.FragmentSOSBinding;
+import com.hermes.storage.ContactPOJO;
+import com.hermes.storage.LocalStorage;
 
+import java.util.List;
 
 
 /**
@@ -37,9 +41,7 @@ public class SOS extends Fragment {
 
     private PageViewModel pageViewModel;
     private FragmentSOSBinding binding;
-
-    public static final String ACCOUNT_SID = "ACdd221cd7d78a93ce9231963bafff46cf";
-    public static final String AUTH_TOKEN = "e49defa5976787661a01becd2dd7bdaa";
+    private TextView first, second, third;
 
     public static SOS newInstance(int index) {
         SOS fragment = new SOS();
@@ -67,6 +69,17 @@ public class SOS extends Fragment {
 
         binding = FragmentSOSBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        first = root.findViewById(R.id.textView5);
+        second = root.findViewById(R.id.textView6);
+        third = root.findViewById(R.id.textView7);
+        List<ContactPOJO> contacts = LocalStorage.getContactList(root);
+        String str = "Sends Emergency Text Message to:\n";
+        for(int i = 0; i < contacts.size(); i++){
+            str += (i+1) + ". " + contacts.get(i).getName() + "\n";
+        }
+        first.setText("Calls 911\n" + str);
+        second.setText(str);
+        third.setText("Sends emergency text messages if you do not check into the app after a certain time.");
 
 //        final TextView textView = binding.sectionLabel;
         pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -102,8 +115,8 @@ public class SOS extends Fragment {
         });
 
 
-        Button fakeCall = view.findViewById(R.id.fakeCall);
-        fakeCall.setOnClickListener(new View.OnClickListener() {
+        Button panic = view.findViewById(R.id.panicButton);
+        panic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -111,6 +124,7 @@ public class SOS extends Fragment {
                             getContext(), Manifest.permission.CALL_PHONE) ==
                             PackageManager.PERMISSION_GRANTED) {
                         makePhoneCall(view);
+                        sendEmergencyMessages(view);
                     }
                     else{
                         requestPermissionLauncher.launch(
@@ -151,12 +165,12 @@ public class SOS extends Fragment {
     }
 
     public void sendEmergencyMessages(View view) {
-        String sPhone = "9738735376";
-        String etMessage = "Test";
+        List<ContactPOJO> contacts = LocalStorage.getContactList(view);
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(sPhone, null, etMessage, null, null);
-
-            //Toast.makeText(getApplicationContext(), "SMS sent.",
+        for(int i = 0; i < contacts.size(); i++){
+            smsManager.sendTextMessage(contacts.get(i).getNumber(), null, contacts.get(i).getMessage(), null, null);
+        }
+        //Toast.makeText(getApplicationContext(), "SMS sent.",
               //      Toast.LENGTH_LONG).show();
         }
 
