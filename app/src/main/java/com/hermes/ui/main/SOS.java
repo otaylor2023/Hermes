@@ -1,17 +1,24 @@
 package com.hermes.ui.main;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -28,6 +35,11 @@ import com.hermes.databinding.FragmentSOSBinding;
 import com.hermes.storage.ContactPOJO;
 import com.hermes.storage.LocalStorage;
 
+import org.w3c.dom.Text;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -42,7 +54,7 @@ public class SOS extends Fragment {
     private PageViewModel pageViewModel;
     private FragmentSOSBinding binding;
     private TextView first, second, third;
-
+    private boolean timerDone = true;
     public static SOS newInstance(int index) {
         SOS fragment = new SOS();
         Bundle bundle = new Bundle();
@@ -135,12 +147,81 @@ public class SOS extends Fragment {
             }
         });
 
+        Button checkIn = view.findViewById(R.id.checkIn);
+        TextView text = view.findViewById(R.id.textView7);
+        checkIn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if(timerDone == true){
+                    checkInPopUp(view, text);
+                    checkIn.setText("Finish Check In");
+                    timerDone = false;
+                }
+                else{
+                    timerDone = true;
+                    checkIn.setText("Check In Button");
+                    text.setText("Sends a fake call to your phone for safety in dangerous areas.");
+                }
+
+            }
+        });
+
+
+
     }
+
+
+
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+
+    private void checkInPopUp(View view, TextView text){
+        LayoutInflater inflater = (LayoutInflater)
+                getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
+        // create the popup window
+        View editContact = inflater.inflate(R.layout.check_in_pop_up, null);
+        Button checkIn = editContact.findViewById(R.id.pickedTime);
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(editContact, width, height, focusable);
+
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        EditText timePicked = editContact.findViewById(R.id.checkInTime);
+        String countdown = timePicked.getText().toString();
+        System.out.println("Countdown: " + countdown);
+        Button check = view.findViewById(R.id.checkIn);
+
+        if(countdown.equals("")){
+            countdown = "5";
+        }
+        String finalCountdown = countdown;
+        checkIn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                new CountDownTimer(Integer.parseInt(finalCountdown) * 60000, 1000){
+                    public void onTick(long millisUntilFinished){
+                        if(timerDone==false){
+                            text.setText("Sends a fake call to your phone for safety in dangerous areas.\n" + ((int)millisUntilFinished/60000 + 1) +" minutes remaining until emergency messages are sent");
+                        }
+                    }
+                    public void onFinish(){
+                        if(timerDone == false){
+                            sendEmergencyMessages(view);
+                            check.setText("Check In Button");
+                            timerDone = true;
+                        }
+                    }
+                }.start();
+                popupWindow.dismiss();
+            }
+        });
     }
 
     private ActivityResultLauncher<String> requestPermissionLauncher =

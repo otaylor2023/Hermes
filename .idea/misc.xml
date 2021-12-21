@@ -10,6 +10,7 @@
         <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/activity_new_contact.xml" value="0.2661064425770308" />
         <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/activity_tabs.xml" value="0.5359375" />
         <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/add_crime_instructions_window.xml" value="0.2692502532928065" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/check_in_pop_up.xml" value="0.34601449275362317" />
         <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/contact_list_items.xml" value="0.2692502532928065" />
         <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/crime_details_window.xml" value="0.2692502532928065" />
         <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/feed_item.xml" value="0.39479166666666665" />
@@ -23,6 +24,7 @@
         <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/list_row_main.xml" value="0.2692502532928065" />
         <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/popupeditcontact.xml" value="0.1" />
         <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/recyclerview_item.xml" value="0.26875" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Hermes-build/app/src/main/res/layout/sign_in_popup.xml" value="0.34601449275362317" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/button_background.xml" value="0.3728205128205128" />
         <entry key="app/src/main/res/drawable/cancelbutton.xml" value="0.36205128205128206" />
