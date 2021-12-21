@@ -60,6 +60,7 @@ public class MapsFragment extends Fragment {
     //private Toolbar toolbar;
     private GoogleMap mMap;
     private static boolean locationPermissionGranted;
+    private static boolean locationSet;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     // sydney, australia
     private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
@@ -359,8 +360,9 @@ public class MapsFragment extends Fragment {
         super.onResume();
         Log.d(TAG, "fragment resumed");
         Log.d(TAG, "location perms: " + locationPermissionGranted);
-        if (locationPermissionGranted) {
+        if (locationPermissionGranted && !locationSet) {
             Log.d(TAG, "setting location");
+            locationSet = true;
             getDeviceLocation();
         }
     }
