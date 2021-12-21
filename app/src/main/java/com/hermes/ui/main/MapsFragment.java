@@ -4,11 +4,16 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,6 +28,8 @@ import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -31,6 +38,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.hermes.HermesUtils;
 import com.hermes.MarkerData;
 import com.hermes.R;
@@ -41,6 +50,7 @@ import com.hermes.storage.OnMarkersReceivedCallback;
 import com.hermes.storage.OrgPOJO;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MapsFragment extends Fragment {
 
@@ -49,7 +59,12 @@ public class MapsFragment extends Fragment {
     private static String TAG = "mercury.maps_fragment";
     //private Toolbar toolbar;
     private GoogleMap mMap;
-    private ServerStorage markerStorage;
+    private static boolean locationPermissionGranted;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    // sydney, australia
+    private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
+    private static final int DEFAULT_ZOOM = 15;
+
 
     public static MapsFragment newInstance(int index) {
         MapsFragment fragment = new MapsFragment();
@@ -74,6 +89,8 @@ public class MapsFragment extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
             Log.d(TAG, "mMap ready");
             mMap = googleMap;
+            getDeviceLocation();
+
             mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
                 @Override
@@ -103,26 +120,6 @@ public class MapsFragment extends Fragment {
                     return info;
                 }
             });
-            mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-                @Override
-                public void onMarkerDragStart(Marker marker) {
-                    Log.d(TAG, "START long" + marker.getPosition().longitude
-                    + "lat: " + marker.getPosition().latitude);
-                }
-
-                @Override
-                public void onMarkerDrag(Marker marker) {
-                    Log.d(TAG, "DRAG long: " + marker.getPosition().longitude
-                            + "lat: " + marker.getPosition().latitude);
-                }
-
-                @Override
-                public void onMarkerDragEnd(Marker marker) {
-                    Log.d(TAG, "END long: " + marker.getPosition().longitude
-                            + "lat: " + marker.getPosition().latitude);
-
-                }
-            });
 
             ServerStorage.getMarkers(new OnMarkersReceivedCallback() {
                 @Override
@@ -133,9 +130,15 @@ public class MapsFragment extends Fragment {
                 }
             }, false);
 
-            LatLng sydney = new LatLng(-34, 151);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker out Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            ServerStorage.attachMarkerListener(new OnMarkersReceivedCallback() {
+                @Override
+                public void onReceived(@NonNull List<MarkerData> markerDataList) {
+                    mMap.clear();
+                    for (MarkerData markerData : markerDataList) {
+                        mMap.addMarker(createMarker(markerData, getView()));
+                    }
+                }
+            });
         }
     };
 
@@ -229,6 +232,13 @@ public class MapsFragment extends Fragment {
 //            }
 //        });
 
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        Log.d(TAG, "maps fragment attached");
+        getDeviceLocation();
     }
 
     public void finishLocation(View mainView, PopupWindow currentPopup, Marker marker) {
@@ -337,4 +347,78 @@ public class MapsFragment extends Fragment {
         DialogFragment newFragment = new DatePickerFragment(button, markerData);
         newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
     }
+
+    public void setLocationPermission(boolean value) {
+        locationPermissionGranted = value;
+        Log.d(TAG, "location permissions set to " + locationPermissionGranted);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "fragment resumed");
+        Log.d(TAG, "location perms: " + locationPermissionGranted);
+        if (locationPermissionGranted) {
+            Log.d(TAG, "setting location");
+            getDeviceLocation();
+        }
+    }
+
+    private void getLocationPermission() {
+        /*
+         * Request location permission, so that we can get the location of the
+         * device. The result of the permission request is handled by a callback,
+         * onRequestPermissionsResult.
+         */
+        if (ContextCompat.checkSelfPermission(getContext().getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            locationPermissionGranted = true;
+            getDeviceLocation();
+        } else {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
+
+
+    private void getDeviceLocation() {
+        /*
+         * Get the best and most recent location of the device, which may be null in rare
+         * cases when a location is not available.
+         */
+        try {
+            if (locationPermissionGranted) {
+                Log.d(TAG, "has location perms");
+                FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
+                Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
+                locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Location> task) {
+                        if (task.isSuccessful()) {
+                            // Set the map's camera position to the current location of the device.
+                            Location currentLocation = task.getResult();
+                            if (currentLocation != null) {
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                        new LatLng(currentLocation.getLatitude(),
+                                                currentLocation.getLongitude()), DEFAULT_ZOOM));
+                            }
+                        } else {
+                            Log.d(TAG, "Current location is null. Using defaults.");
+                            Log.e(TAG, "Exception: %s", task.getException());
+                            mMap.moveCamera(CameraUpdateFactory
+                                    .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+                        }
+                    }
+                });
+            } else {
+                getLocationPermission();
+            }
+        } catch (SecurityException e)  {
+            Log.e("Exception: %s", e.getMessage(), e);
+        }
+    }
+
 }

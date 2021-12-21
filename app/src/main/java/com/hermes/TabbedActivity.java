@@ -1,12 +1,17 @@
 package com.hermes;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.hermes.storage.ServerStorage;
 import com.hermes.storage.LocalStorage;
@@ -29,6 +35,9 @@ public class TabbedActivity extends AppCompatActivity {
 
     private ActivityTabsBinding binding;
     private MapsFragment mapsFragment;
+    private boolean locationPermissionGranted;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    private boolean locationSent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +80,7 @@ public class TabbedActivity extends AppCompatActivity {
         rootView.findViewById(R.id.signInButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                beginSignIn(view);
+                checkSignIn(view);
             }
         });
 
@@ -85,6 +94,41 @@ public class TabbedActivity extends AppCompatActivity {
 //
 //                    }
 //                });
+    }
+
+    public void checkSignIn(View mainView) {
+        OrgPOJO orgPOJO = LocalStorage.getCurrentUser(mainView);
+        if (orgPOJO == null) {
+            beginSignIn(mainView);
+            return;
+        }
+
+        LayoutInflater inflater = (LayoutInflater)
+                mainView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        View loggedInView = inflater.inflate(R.layout.account_info_popup, null);
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow loggedInWindow = new PopupWindow(loggedInView, width, height, focusable);
+        loggedInWindow.showAtLocation(mainView, Gravity.CENTER, 0, 0);
+
+        TextView displayNameBox = loggedInView.findViewById(R.id.detailDisplayName);
+        displayNameBox.setText(orgPOJO.getDisplayName());
+
+        TextView usernameBox = loggedInView.findViewById(R.id.detailUsername);
+        usernameBox.setText(orgPOJO.getUsername());
+
+        Button signOutButton = loggedInView.findViewById(R.id.signOutButton);
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LocalStorage.signUserOut(view);
+                Button signInButton = mainView.findViewById(R.id.signInButton);
+                signInButton.setText("Sign In");
+                loggedInWindow.dismiss();
+            }
+        });
     }
 
 
@@ -147,4 +191,28 @@ public class TabbedActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    locationPermissionGranted = true;
+                    Log.d(TAG, "location permissions granted");
+                    mapsFragment.setLocationPermission(locationPermissionGranted);
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "resumed");
+    }
 }

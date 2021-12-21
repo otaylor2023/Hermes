@@ -48,7 +48,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         // contents of the view with that element
         MarkerData markerData = markerList.get(position);
         viewHolder.getTypeBox().setText(String.format("Type: %s", markerData.getCrimeString(viewHolder.getView())));
-        viewHolder.getSourceBox().setText(String.format("Source: %s", markerData.getOrganization()));
+        viewHolder.getSourceBox().setText(String.format("Source: %s", (markerData.getOrganization() == null) ? "Anonymous" : markerData.getOrganization()));
         viewHolder.getDateBox().setText(String.format("Date: %s", markerData.getDateStr()));
         viewHolder.getDescBox().setText(markerData.getDescription());
     }
