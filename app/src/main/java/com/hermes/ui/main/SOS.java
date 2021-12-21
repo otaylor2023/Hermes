@@ -215,6 +215,7 @@ public class SOS extends Fragment {
                         if(timerDone == false){
                             sendEmergencyMessages(view);
                             check.setText("Check In Button");
+                            text.setText("Sends a fake call to your phone for safety in dangerous areas.");
                             timerDone = true;
                         }
                     }
