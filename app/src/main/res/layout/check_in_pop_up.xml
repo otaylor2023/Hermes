@@ -29,9 +29,12 @@
             android:id="@+id/checkInTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
             android:ems="10"
-            android:inputType="time"
-            android:hint="Time until check in"/>
+            android:hint="Time until check in"
+            android:inputType="number" />
 
     </LinearLayout>
 

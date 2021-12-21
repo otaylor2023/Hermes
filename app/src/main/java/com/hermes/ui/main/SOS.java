@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.hermes.HermesUtils;
 import com.hermes.R;
 import com.hermes.databinding.FragmentSOSBinding;
 import com.hermes.storage.ContactPOJO;
@@ -194,17 +195,19 @@ public class SOS extends Fragment {
 
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
         EditText timePicked = editContact.findViewById(R.id.checkInTime);
-        String countdown = timePicked.getText().toString();
-        System.out.println("Countdown: " + countdown);
-        Button check = view.findViewById(R.id.checkIn);
+        timePicked.setOnFocusChangeListener(HermesUtils.getTextFocusListener(R.id.checkInTime));
 
-        if(countdown.equals("")){
-            countdown = "5";
-        }
-        String finalCountdown = countdown;
         checkIn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                String countdown = timePicked.getText().toString();
+                Log.d(TAG, "Countdown: " + countdown);
+                Button check = view.findViewById(R.id.checkIn);
+
+                if(countdown.equals("")){
+                    countdown = "5";
+                }
+                String finalCountdown = countdown;
                 new CountDownTimer(Integer.parseInt(finalCountdown) * 60000, 1000){
                     public void onTick(long millisUntilFinished){
                         if(timerDone==false){
