@@ -22,4 +22,5 @@
     <style name="Theme.Hermesbuild.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Hermesbuild.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
