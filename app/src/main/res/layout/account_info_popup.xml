@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_background"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView13"
+        style="@style/crime_label_styles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Account Details"
+        android:textSize="20sp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/black">
+
+    </TableRow>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView14"
+                style="@style/crime_label_styles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Display name:" />
+
+            <TextView
+                android:id="@+id/detailDisplayName"
+                style="@style/crime_label_styles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Neighborhood Watch"
+                android:textStyle="normal" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView20"
+                style="@style/crime_label_styles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username:" />
+
+            <TextView
+                android:id="@+id/detailUsername"
+                style="@style/crime_label_styles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="neighborhood_watch"
+                android:textStyle="normal" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/black" />
+
+    <Button
+        android:id="@+id/signOutButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/button_background"
+        android:gravity="center"
+        android:paddingHorizontal="20dp"
+        android:text="Sign Out"
+        android:textColor="@color/black" />
+</LinearLayout>
