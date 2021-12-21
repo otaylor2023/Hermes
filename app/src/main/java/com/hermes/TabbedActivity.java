@@ -15,9 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
-import com.hermes.HermesUtils;
-import com.hermes.R;
-import com.hermes.storage.HermesStorage;
+import com.hermes.storage.ServerStorage;
 import com.hermes.storage.LocalStorage;
 import com.hermes.storage.OnLoginCheckedCallback;
 import com.hermes.storage.OrgPOJO;
@@ -31,7 +29,6 @@ public class TabbedActivity extends AppCompatActivity {
 
     private ActivityTabsBinding binding;
     private MapsFragment mapsFragment;
-    private HermesStorage hermesStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +59,6 @@ public class TabbedActivity extends AppCompatActivity {
         final View rootView = getWindow().getDecorView().getRootView();
 
         //by now all views will be displayed with correct values
-        hermesStorage = new HermesStorage();
 //                        LocalStorage.signUserOut(rootView);
 //        HermesUtils.createFakeContacts(rootView);
 //        LocalStorage.deleteContact(rootView, "person1");
@@ -125,7 +121,7 @@ public class TabbedActivity extends AppCompatActivity {
     public void attemptSignIn(View logInView, EditText usernameBox, EditText passwordBox, PopupWindow logInWindow) {
         String username = usernameBox.getText().toString();
         String unhashedPassword = passwordBox.getText().toString();
-        hermesStorage.attemptSignIn(username, unhashedPassword, new OnLoginCheckedCallback() {
+        ServerStorage.attemptSignIn(username, unhashedPassword, new OnLoginCheckedCallback() {
             @Override
             public void onLoginChecked(OrgPOJO match) {
                 if (match == null) {
