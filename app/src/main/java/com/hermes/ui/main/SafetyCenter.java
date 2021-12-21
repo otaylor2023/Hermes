@@ -37,7 +37,6 @@ import com.hermes.databinding.FragmentSafetyCenterBinding;
 import com.hermes.databinding.FragmentTabsBinding;
 import com.hermes.storage.ContactPOJO;
 import com.hermes.storage.LocalStorage;
-import com.hermes.storage.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

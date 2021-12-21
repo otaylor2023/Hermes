@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hermes.R;
 import com.hermes.storage.ContactPOJO;
+import com.hermes.storage.LocalStorage;
 
 import java.util.List;
 

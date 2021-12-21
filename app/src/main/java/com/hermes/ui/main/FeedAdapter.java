@@ -5,10 +5,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hermes.MarkerData;
 import com.hermes.R;
+import com.hermes.storage.OnMarkersReceivedCallback;
+import com.hermes.storage.ServerStorage;
 
 import java.util.List;
 
@@ -18,6 +21,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     public FeedAdapter(List<MarkerData> dataSet) {
         markerList = dataSet;
+        ServerStorage.attachMarkerListener(new OnMarkersReceivedCallback() {
+            @Override
+            public void onReceived(@NonNull List<MarkerData> markerDataList) {
+                updateMarkerList(markerDataList);
+            }
+        });
     }
 
 

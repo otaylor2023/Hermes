@@ -6,12 +6,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.hermes.storage.ContactPOJO;
-import com.hermes.storage.HermesStorage;
+import com.hermes.storage.ServerStorage;
 import com.hermes.storage.LocalStorage;
 import com.hermes.storage.OrgPOJO;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 import java.util.Map;
 
 public class HermesUtils {
@@ -43,8 +42,7 @@ public class HermesUtils {
             e.printStackTrace();
         }
         orgPOJO.setUsername("neighborhood_watch");
-        HermesStorage hermesStorage = new HermesStorage();
-        hermesStorage.addOrganization(orgPOJO);
+        ServerStorage.addOrganization(orgPOJO);
     }
 
 

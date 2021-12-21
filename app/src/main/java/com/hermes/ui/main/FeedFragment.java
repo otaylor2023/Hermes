@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hermes.MarkerData;
 import com.hermes.R;
 import com.hermes.databinding.FragmentFeedBinding;
-import com.hermes.storage.HermesStorage;
+import com.hermes.storage.ServerStorage;
 import com.hermes.storage.OnMarkersReceivedCallback;
 
 import java.util.List;
@@ -27,7 +27,6 @@ public class FeedFragment extends Fragment {
     private FragmentFeedBinding binding;
     private RecyclerView recyclerView;
     private FeedAdapter adapter;
-    private HermesStorage hermesStorage;
 
     public static FeedFragment newInstance(int index) {
         FeedFragment fragment = new FeedFragment();
@@ -48,8 +47,7 @@ public class FeedFragment extends Fragment {
         View root = binding.getRoot();
 
         recyclerView = root.findViewById(R.id.crime_feed_recycler);
-        this.hermesStorage = new HermesStorage();
-        hermesStorage.getMarkers(new OnMarkersReceivedCallback() {
+        ServerStorage.getMarkers(new OnMarkersReceivedCallback() {
             @Override
             public void onReceived(@NonNull List<MarkerData> markerDataList) {
 
@@ -58,21 +56,11 @@ public class FeedFragment extends Fragment {
                 recyclerView.setAdapter(adapter);
                 Log.d(TAG, "item number: " + adapter.getItemCount());
             }
-        });
+        }, false);
 
 
         return root;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "feed fragment resumed");
-        hermesStorage.getMarkers(new OnMarkersReceivedCallback() {
-            @Override
-            public void onReceived(@NonNull List<MarkerData> markerDataList) {
-                adapter.updateMarkerList(markerDataList);
-            }
-        });
-    }
+
 }

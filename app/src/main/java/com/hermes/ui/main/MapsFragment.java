@@ -34,15 +34,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.hermes.HermesUtils;
 import com.hermes.MarkerData;
 import com.hermes.R;
-import com.hermes.storage.HermesStorage;
+import com.hermes.storage.ServerStorage;
 import com.hermes.storage.LocalStorage;
 import com.hermes.storage.MarkerPOJO;
 import com.hermes.storage.OnMarkersReceivedCallback;
 import com.hermes.storage.OrgPOJO;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class MapsFragment extends Fragment {
 
@@ -51,7 +49,7 @@ public class MapsFragment extends Fragment {
     private static String TAG = "mercury.maps_fragment";
     //private Toolbar toolbar;
     private GoogleMap mMap;
-    private HermesStorage markerStorage;
+    private ServerStorage markerStorage;
 
     public static MapsFragment newInstance(int index) {
         MapsFragment fragment = new MapsFragment();
@@ -126,15 +124,14 @@ public class MapsFragment extends Fragment {
                 }
             });
 
-            markerStorage = new HermesStorage();
-            markerStorage.getMarkers(new OnMarkersReceivedCallback() {
+            ServerStorage.getMarkers(new OnMarkersReceivedCallback() {
                 @Override
                 public void onReceived(@NonNull List<MarkerData> markerDataList) {
                     for (MarkerData markerData : markerDataList) {
                         mMap.addMarker(createMarker(markerData, getView()));
                     }
                 }
-            });
+            }, false);
 
             LatLng sydney = new LatLng(-34, 151);
             googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker out Sydney"));
@@ -300,7 +297,7 @@ public class MapsFragment extends Fragment {
                 markerData.setLocation(marker.getPosition());
                 MarkerOptions markerOptions = createMarker(markerData, view);
                 mMap.addMarker(markerOptions);
-                markerStorage.addMarker(new MarkerPOJO(markerData));
+                ServerStorage.addMarker(new MarkerPOJO(markerData));
                 infoWindow.dismiss();
 
 
