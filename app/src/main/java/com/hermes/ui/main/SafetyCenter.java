@@ -45,6 +45,7 @@ import com.hermes.databinding.FragmentSafetyCenterBinding;
 import com.hermes.databinding.FragmentTabsBinding;
 import com.hermes.storage.ContactPOJO;
 import com.hermes.storage.LocalStorage;
+import com.hermes.storage.OnContactsChangedCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,10 +62,8 @@ public class SafetyCenter extends Fragment  implements RecyclerViewAdapter.ItemC
 
     private PageViewModel pageViewModel;
     private @NonNull FragmentSafetyCenterBinding binding;
-    EditText editText;
     FloatingActionButton add;
     RecyclerView recyclerView;
-    List<ContactPOJO> dataList = new ArrayList<>();
     RecyclerViewAdapter adapter;
 
 
@@ -84,6 +83,7 @@ public class SafetyCenter extends Fragment  implements RecyclerViewAdapter.ItemC
         if (getArguments() != null) {
             index = getArguments().getInt(ARG_SECTION_NUMBER);
         }
+        Log.d(TAG, "safety view created");
         pageViewModel.setIndex(index);
     }
 
@@ -98,18 +98,23 @@ public class SafetyCenter extends Fragment  implements RecyclerViewAdapter.ItemC
 
         add = root.findViewById(R.id.bt_add);
         recyclerView = root.findViewById(R.id.recycler_view);
-        dataList = LocalStorage.getContactList(root);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new RecyclerViewAdapter(getContext(), dataList);
+        adapter = new RecyclerViewAdapter(LocalStorage.getContactList(root));
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
+        Log.d(TAG, "safety view created");
+//        LocalStorage.addContactChangedListener(root, new OnContactsChangedCallback() {
+//            @Override
+//            public void onContactsChanged(List<ContactPOJO> contactPOJOList) {
+//                updateContactList(root, contactPOJOList);
+//            }
+//        });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(getActivity(), AddNewContact.class);
                 startActivity(intent);
-                updateContactList(root);
                 //dataList = LocalStorage.getContactList(root);
 
 
@@ -119,10 +124,14 @@ public class SafetyCenter extends Fragment  implements RecyclerViewAdapter.ItemC
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.updateDataList(getView());
+    }
 
     @Override
     public void onItemClick(View view, int position) {
-        updateContactList(view);
         //Toast.makeText(getActivity(), dataList.toString(), Toast.LENGTH_SHORT).show();
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
@@ -142,28 +151,25 @@ public class SafetyCenter extends Fragment  implements RecyclerViewAdapter.ItemC
         EditText name = editContact.findViewById(R.id.name);
         EditText number = editContact.findViewById(R.id.number);
         EditText message = editContact.findViewById(R.id.messageEdit);
-        name.setText(dataList.get(position).getName());
-        number.setText(dataList.get(position).getNumber());
-        message.setText(dataList.get(position).getMessage());
+        name.setOnFocusChangeListener(HermesUtils.getTextFocusListener(R.id.name));
+        number.setOnFocusChangeListener(HermesUtils.getTextFocusListener(R.id.number));
+        message.setOnFocusChangeListener(HermesUtils.getTextFocusListener(R.id.messageEdit));
+        ContactPOJO targetContact = adapter.getContactAtPosition(position);
+        name.setText(targetContact.getName());
+        number.setText(targetContact.getNumber());
+        message.setText(targetContact.getMessage());
 
         // dismiss the popup window when touched
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("Deleting Contact");
+                LocalStorage.deleteContact(view, targetContact.getName());
                 LocalStorage.saveContact(view, new ContactPOJO(name.getText().toString(), number.getText().toString(), message.getText().toString()));
+                adapter.updateDataList(view);
                 popupWindow.dismiss();
             }
         });
     }
 
-    public void updateContactList(View view){
-        dataList = LocalStorage.getContactList(view);
-        adapter.notifyDataSetChanged();
-        adapter.notifyItemInserted(dataList.size()-1);
-        adapter.notifyItemRangeChanged(dataList.size()-1, dataList.size());
-    }
-    public List<ContactPOJO> getData(){
-        return dataList;
-    }
 }

@@ -67,12 +67,14 @@
 
             <EditText
                 android:id="@+id/usernameBox"
+                style="@style/edittext_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
+                android:textCursorDrawable="@null"
                 android:textSize="16sp" />
         </TableRow>
 
@@ -112,12 +114,15 @@
 
             <EditText
                 android:id="@+id/passwordBox"
+                style="@style/edittext_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
+                android:backgroundTint="@color/white"
                 android:ems="10"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
+                android:textCursorDrawable="@null"
                 android:textSize="16sp" />
         </TableRow>
     </TableLayout>

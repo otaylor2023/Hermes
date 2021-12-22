@@ -24,15 +24,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public RecyclerViewAdapter(Context context, List<ContactPOJO> data) {
-        this.mInflater = LayoutInflater.from(context);
+    public RecyclerViewAdapter(List<ContactPOJO> data) {
         this.mData = data;
     }
 
     // inflates the row layout from xml when needed
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.list_row_main, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_main, parent, false);
         return new ViewHolder(view);
     }
 
@@ -46,10 +45,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View view){
                 System.out.println("Deleting Contact");
                 LocalStorage.deleteContact(view, contact.getName());
-                mData = LocalStorage.getContactList(view);
-                System.out.println(LocalStorage.getContactList(view));
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, mData.size());
+                updateDataList(view);
+//                mData = LocalStorage.getContactList(view);
+//                System.out.println(LocalStorage.getContactList(view));
+//                notifyItemRemoved(position);
+//                notifyItemRangeChanged(position, mData.size());
             }
         });
 
@@ -94,5 +94,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+    }
+
+    public void updateDataList(View view) {
+        mData = LocalStorage.getContactList(view);
+        notifyDataSetChanged();
+    }
+
+    public ContactPOJO getContactAtPosition(int pos) {
+        return mData.get(pos);
     }
 }

@@ -161,7 +161,7 @@ public class SOS extends Fragment {
                 else{
                     timerDone = true;
                     checkIn.setText("Check In Button");
-                    text.setText("Sends a fake call to your phone for safety in dangerous areas.");
+                    text.setText("Sends emergency text messages if you do not check into the app after a certain time.");
                 }
 
             }
@@ -211,14 +211,14 @@ public class SOS extends Fragment {
                 new CountDownTimer(Integer.parseInt(finalCountdown) * 60000, 1000){
                     public void onTick(long millisUntilFinished){
                         if(timerDone==false){
-                            text.setText("Sends a fake call to your phone for safety in dangerous areas.\n" + ((int)millisUntilFinished/60000 + 1) +" minutes remaining until emergency messages are sent");
+                            text.setText("Sends emergency text messages if you do not check into the app after a certain time.\n" + ((int)millisUntilFinished/60000 + 1) +" minutes remaining until emergency messages are sent");
                         }
                     }
                     public void onFinish(){
                         if(timerDone == false){
                             sendEmergencyMessages(view);
                             check.setText("Check In Button");
-                            text.setText("Sends a fake call to your phone for safety in dangerous areas.");
+                            text.setText("Sends emergency text messages if you do not check into the app after a certain time.");
                             timerDone = true;
                         }
                     }
@@ -243,7 +243,7 @@ public class SOS extends Fragment {
             });
 
     public void makePhoneCall(View view){
-        String number = "9738735376";
+        String number = "911";
         Intent i = new Intent(Intent.ACTION_CALL);
         i.setData(Uri.parse("tel:"+number));
         startActivity(i);

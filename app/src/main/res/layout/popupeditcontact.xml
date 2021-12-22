@@ -38,6 +38,7 @@
 
         <EditText
             android:id="@+id/name"
+            style="@style/edittext_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -62,12 +63,13 @@
 
         <EditText
             android:id="@+id/number"
+            style="@style/edittext_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine"
+            android:inputType="number"
             android:minHeight="48dp"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -88,6 +90,7 @@
 
         <EditText
             android:id="@+id/messageEdit"
+            style="@style/edittext_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

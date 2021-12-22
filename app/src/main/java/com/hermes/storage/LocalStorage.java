@@ -2,6 +2,7 @@ package com.hermes.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LocalStorage {
+
+    private static final String TAG = "mercury.localstorage";
 
 
     public static OrgPOJO getCurrentUser(View view) {
@@ -81,6 +84,18 @@ public class LocalStorage {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(name);
         editor.apply();
+    }
+
+    public static void addContactChangedListener(View view, OnContactsChangedCallback contactsChangedCallback) {
+        SharedPreferences contactPreferences = view.getContext().getSharedPreferences(LocalLocations.CONTACTS.path, Context.MODE_PRIVATE);
+        Log.d(TAG, "listener added");
+        contactPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                Log.d(TAG, "contacts changed");
+                contactsChangedCallback.onContactsChanged(getContactList(view));
+            }
+        });
     }
 
 

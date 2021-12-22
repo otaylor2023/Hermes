@@ -90,7 +90,24 @@ public class MapsFragment extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
             Log.d(TAG, "mMap ready");
             mMap = googleMap;
-            getDeviceLocation();
+
+            mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+                @Override
+                public void onMarkerDrag(@NonNull Marker marker) {
+
+                }
+
+                @Override
+                public void onMarkerDragEnd(@NonNull Marker marker) {
+
+                }
+
+                @Override
+                public void onMarkerDragStart(@NonNull Marker marker) {
+
+                }
+            });
+//            getDeviceLocation();
 
             mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
@@ -235,12 +252,6 @@ public class MapsFragment extends Fragment {
 
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        Log.d(TAG, "maps fragment attached");
-        getDeviceLocation();
-    }
 
     public void finishLocation(View mainView, PopupWindow currentPopup, Marker marker) {
         currentPopup.dismiss();

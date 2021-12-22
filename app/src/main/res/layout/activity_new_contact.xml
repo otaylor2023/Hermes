@@ -27,9 +27,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/black"
         android:hint="Contact Name"
         android:minHeight="48dp"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textCursorDrawable="@null" />
 
     <!--EditText to take the data from the user and
          save the data in SharedPreferences-->
@@ -41,9 +43,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/black"
         android:hint="Contact Number"
         android:minHeight="48dp"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textCursorDrawable="@null" />
 
     <EditText
         android:id="@+id/edit3"
@@ -53,14 +57,17 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/black"
         android:hint="Message for Contact"
         android:minHeight="48dp"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textCursorDrawable="@null" />
 
     <Button
         android:id="@+id/saveContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp"
         android:layout_marginEnd="8dp"
         android:text="Save Emergency Contact" />

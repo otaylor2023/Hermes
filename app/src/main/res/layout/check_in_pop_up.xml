@@ -27,6 +27,7 @@
 
         <EditText
             android:id="@+id/checkInTime"
+            style="@style/edittext_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -34,7 +35,8 @@
             android:layout_alignParentBottom="true"
             android:ems="10"
             android:hint="Time until check in"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -43,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Done" />
+        android:text="Done"
+        android:textColor="@color/black" />
 
 </LinearLayout>
